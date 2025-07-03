@@ -2,7 +2,7 @@
 
 # Init npm
 npm init -y
-mkdir -p src/models src/types
+mkdir -p src/models src/types src/assets src/utils public/ 
 touch ./src/index.ts
 
 # Add basic content to index.ts
@@ -18,15 +18,13 @@ cat <<EOF > package.json
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "npx tsc && node ./dist/index.js"
+    "start": "npx tsc && node ./dist/index.js",
+    "build": "npx tsc"
   },
   "keywords": [],
   "author": "Vugar Safarzada",
   "license": "ISC",
-  "description": "Default TypeScript Project",
-  "devDependencies": {
-    "typescript": "^5.5.4"
-  }
+  "description": "Default TypeScript Project"
 }
 EOF
 
@@ -60,6 +58,10 @@ cat <<EOF > README.md
 **Date:** _$(date '+%d.%m.%Y')_
 EOF
 
-# Install dependencies and run project
-npm install typescript --save-dev
+# Install dependencies
+npm install typescript --save-dev || { echo "Installation failed"; exit 1; }
+
+clear
+
+# Run project
 npm run start
