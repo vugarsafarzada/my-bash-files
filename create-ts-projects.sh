@@ -2,13 +2,14 @@
 
 # Init npm
 npm init -y
-mkdir src
-mkdir src/models
-mkdir src/types
+mkdir -p src/models src/types
 touch ./src/index.ts
 
+# Add basic content to index.ts
+echo 'console.log("Hello, TypeScript!");' > ./src/index.ts
+
 # Init tsc
-tsc -init
+npx tsc --init
 
 # Edit package.json
 cat <<EOF > package.json
@@ -17,14 +18,16 @@ cat <<EOF > package.json
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "tsc; node ./dist/index.js"
+    "start": "npx tsc && node ./dist/index.js"
   },
   "keywords": [],
   "author": "Vugar Safarzada",
   "license": "ISC",
-  "description": "Default TypeScript Project"
+  "description": "Default TypeScript Project",
+  "devDependencies": {
+    "typescript": "^5.5.4"
+  }
 }
-
 EOF
 
 # Edit tsconfig.json
@@ -50,5 +53,13 @@ cat <<EOF > tsconfig.json
 }
 EOF
 
-# Run project
-npm run start;
+# Create README.md
+cat <<EOF > README.md
+# TypeScript Project
+**Created by:** _[Vugar Safarzada](https://github.com/vugarsafarzada)_ <br/>
+**Date:** _$(date '+%d.%m.%Y')_
+EOF
+
+# Install dependencies and run project
+npm install typescript --save-dev
+npm run start
